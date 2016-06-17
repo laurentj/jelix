@@ -60,7 +60,7 @@ class jConfigCompiler {
         self::$commonConfig = jelix_read_ini(jApp::mainConfigFile());
 
         // this is the defaultconfig file of JELIX itself
-        $config = jelix_read_ini(JELIX_LIB_CORE_PATH.'defaultconfig.ini.php');
+        $config = jelix_read_ini(__DIR__.'/defaultconfig.ini.php');
 
         // read the main configuration of the app
         @jelix_read_ini(jApp::mainConfigFile(), $config);
@@ -71,7 +71,7 @@ class jConfigCompiler {
         }
 
         // read the configuration specific to the entry point
-        if ($configFile != 'mainconfig.ini.php' && $configFile != 'defaultconfig.ini.php') {
+        if ($configFile != 'mainconfig.ini.php') {
             if(!file_exists($configPath.$configFile))
                 throw new Exception("Configuration file is missing -- $configFile", 5);
             if( false === @jelix_read_ini($configPath.$configFile, $config))
